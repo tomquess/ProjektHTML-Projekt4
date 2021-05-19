@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<title>Quick Start - Leaflet</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>	
+</head>
+<body>
+<div id="mapid" style="width: 600px; height: 400px;"></div>
+
+<button id="guzikOkna" onclick="noweOkno()">Nowe okno</button>
+<script>
+	var mymap = L.map('mapid').setView([54.443581, 18.556359], 16);
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(mymap);
+    
+    L.marker([54.442508, 18.555774]).addTo(mymap)
+		.bindPopup("<b>UG Wydział Zarządzania</b>");
+
+    L.marker([54.445028, 18.554814]).addTo(mymap)
+		.bindPopup("<b>UG Wydział Ekonomiczny</b>");
+
+    L.marker([54.4451, 18.553564]).addTo(mymap)
+		.bindPopup("<b>UG Centrum Dydaktyczne</b>");
+
+    L.circle([54.444819, 18.5574], 40, {
+		color: 'red',
+		fillColor: '#f03',
+		fillOpacity: 0.5
+	}).addTo(mymap).bindPopup("<b>Komenda miejska policji w Sopocie</b>");
+
+    L.polygon([
+		[54.445141, 18.552309],
+		[54.445187, 18.553001],
+		[54.445013, 18.553054],
+        [54.444941, 18.552411]
+	]).addTo(mymap).bindPopup("<b>Parking dla studentów</b>");
+
+    L.polygon([
+		[54.445424, 18.552336],
+		[54.445465, 18.552781],
+		[54.445268, 18.552888],
+        [54.445234, 18.552378]
+	]).addTo(mymap).bindPopup("<b>Parking dla pracowników</b>");
+
+
+    var popup = L.popup();
+	function onMapClick(e) {
+		popup
+			.setLatLng(e.latlng)
+			.setContent("You clicked the map at " + e.latlng.toString())
+			.openOn(mymap);
+	}
+	mymap.on('click', onMapClick);
+
+	function noweOkno() {
+		window.open("index.html","Nowe Okno","toolbar=0,menubar=0,scrollbars=0,resizable=0,status=0,location=0,directories=0,top=20,left=20,height=450,width=650");
+
+	}
+
+
+
+    
+</script>
+</body>
+</html>
